@@ -10,3 +10,4 @@ const userRouter = require("./routers/userRouters");
 const authRouter=require("./routers/authRouters")
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+const planModel = require("./models/planModels");

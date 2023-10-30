@@ -8,7 +8,7 @@ mongoose
   .connect(db_link)
   .then(function (db) {
     //console.log(db);
-    console.log("MongoDB connected");
+    console.log("MongoDB User connected");
   })
   .catch(function (err) {
     console.log(err);
