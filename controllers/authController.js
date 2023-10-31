@@ -86,11 +86,12 @@ module.exports.protectRoute = async function protectRoute(req, res, next) {
       token = req.cookies.login;
       //jwt.verify returns payload {payload:_id} payload contain unique id which we stored from mongodb
       let payload = jwt.verify(token, JWT_KEY);
-
+      //console.log("Coming");
       if (payload) {
         const user = await userModel.findById(payload.payload);
         req.role = user.role;
         req.id = user.id;
+        //console.log(req.id);
         next();
       } else {
         //Agar request Chrome browser se aai hai to redirect krdo
