@@ -5,7 +5,7 @@ mongoose
   .connect(db_link)
   .then(function (db) {
     //console.log(db);
-    console.log("MongoDB Plan connected");
+    console.log("MongoDB Review connected");
   })
   .catch(function (err) {
     console.log(err);

@@ -7,9 +7,10 @@ app.listen(3000);
 app.use(cookieParser());
 
 const userRouter = require("./routers/userRouters");
-const authRouter = require("./routers/authRouters");
+// const authRouter = require("./routers/authRouters");
 const planRouter = require("./routers/planRouters");
-app.use("/auth", authRouter);
+const reviewRouters = require("./routers/reviewRouters");
+app.use("/review", reviewRouters);
 app.use("/user", userRouter);
 app.use("/plans", planRouter);
 
