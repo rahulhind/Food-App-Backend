@@ -108,12 +108,19 @@ module.exports.top3plans = async function top3plans(req, res) {
     //Limit will return 3 objects and sort:-1 will sort in descending order
     const topPlans = await planModel
       .find()
-      .sort({ ratingAverage: -1 })
-      .limit(3);
-    return res.json({
-      message: "Top 3 plans",
-      data: topPlans,
-    });
+      .sort({ ratingsAverage: -1 })
+          .limit(3);
+      if (topPlans) {
+          return res.json({
+              message: "Top 3 plans",
+              data: topPlans,
+          });
+      } else {
+        return res.json({
+            message: "Can't fetch plans"
+          
+        });
+      }
   } catch (err) {
     res.status(500).json({
       message: err.message,
