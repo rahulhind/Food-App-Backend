@@ -5,17 +5,22 @@ const {
   getPlanReviews,
   createReviews,
   updateReviews,
-    deleteReviews,
-  top3reviews
+  deleteReviews,
+  top3reviews,
 } = require("../controllers/reviewController");
 const reviewRouters = express.Router();
 
 reviewRouters.route("/all").get(getAllReviews);
 reviewRouters.route("/top3").get(top3reviews);
+//Send plan id to getPlanReviews
 reviewRouters.route("/:id").get(getPlanReviews);
 
 reviewRouters.use(protectRoute);
-reviewRouters.route("/crud/:plan").post(createReviews);
-reviewRouters.route("/crud/:id").patch(updateReviews).delete(deleteReviews);
+//Pass id of review in req body for Update and Delete route
+reviewRouters
+  .route("/crud/:plan")
+  .post(createReviews)
+  .patch(updateReviews)
+  .delete(deleteReviews);
 
 module.exports = reviewRouters;
