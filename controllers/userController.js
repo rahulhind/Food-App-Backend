@@ -129,3 +129,7 @@ module.exports.deleteUser = async function deleteUser(req, res) {
     });
   }
 };
+
+module.exports.uploadProfileImage = async function uploadProfileImage(req, res) {
+res.json({message:"Upload Successful"})
+}

@@ -1,10 +1,11 @@
 const express = require("express");
-
+const multer = require("multer");
 const {
   getUser,
   getAlluser,
   updateUser,
   deleteUser,
+  uploadProfileImage
 } = require("../controllers/userController");
 
 const {
@@ -19,6 +20,40 @@ const {
 // app.use(cookieParser());
 const userRouter = express.Router();
 
+//Multer is a middleware jo file or image upload krne me help krta hai
+//Upload-> Where to store, filter the data
+const multerStorage = multer.diskStorage({
+  //destination to store files
+  destination: function (req, file, cb) {
+    //call back(cb) function take (error,destination)
+    cb(null,'public/images')
+  }, 
+  //To store unique files
+  filename: function (req, file, cb) {
+    console.log("Coming");
+    cb(null, `user-${Date.now()}.jpeg`)
+  }
+});
+
+//Koi galat file upload krde usse bchane ke liye filter
+const filter = function (req, file, cb) {
+  if (file.mimetype.startsWith("image")) {
+    cb(null,true)
+  } else {
+    cb(new Error("Not an Image! Please upload an Image"),false)
+  }
+}
+//This code comes from documentation
+const upload = multer({
+  storage: multerStorage,
+  fileFilter:filter
+})
+//upload ke andar bht sare functions hote hai jaise single, array
+  //Aur single ke andar 'photo' Multer ke html ke same hona chaiye
+userRouter.post("/ProfileImage", upload.single('photo'), uploadProfileImage)
+userRouter.get("/ProfileImage", (req, res) => {
+  res.sendFile("C:/Users/ASUS/OneDrive/Desktop/Backend Development/app/multer.html")
+})
 // userRouter
 //   .route("/")
 //   .get(protectRoute,getUser)//Middleware to protect data from not logged in user
