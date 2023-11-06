@@ -10,7 +10,9 @@ const userRouter = require("./routers/userRouters");
 // const authRouter = require("./routers/authRouters");
 const planRouter = require("./routers/planRouters");
 const reviewRouters = require("./routers/reviewRouters");
+const bookingRouter = require("./routers/bookingRouters");
 app.use("/review", reviewRouters);
 app.use("/user", userRouter);
 app.use("/plans", planRouter);
+app.use("/booking", bookingRouter);
 

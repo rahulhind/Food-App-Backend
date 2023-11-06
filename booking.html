@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy cool new product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+      .centered-section {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+      }
+
+  </style>
+  </head>
+  <body>
+    <section class="centered-section">
+      <div class="product">
+        <img src="https://i.pinimg.com/564x/90/27/44/9027448abc73352cc7d095b1efbb17d7.jpg" alt="The cover of Stubborn Attachments" />
+        <div class="description">
+          <h3>Now you are mine</h3>
+          <h5>$200.00</h5>
+        </div>
+      </div>
+      <form action="/booking/createSession" method="POST">
+        <button type="submit" id="checkout-button">Checkout</button>
+      </form>
+    </section>
+  </body>
+  
+</html>
