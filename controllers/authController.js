@@ -1,12 +1,14 @@
 const userModel = require("../models/userModel");
 const { JWT_KEY } = require("../secrets");
 const jwt = require("jsonwebtoken");
-
+const {sendMail}=require("../utility/nodeMailer")
 //Signup user
 module.exports.signup = async function signup(req, res) {
   try {
     let dataObj = req.body;
-    let user = userModel.create(dataObj);
+    let user = await userModel.create(dataObj);
+    //console.log(user);
+     sendMail("signup",user);
     if (user) {
       res.json({
         message: "User signed in successfull",
@@ -130,6 +132,14 @@ module.exports.forgetPassword = async function forgetPassword(req, res) {
       )}//resetPassword/${resetToken}`;
       //Send mail to user
       //nodemailer
+      let obj = {
+        resetPasswordLink: resetPasswordLink,
+        email: email
+      };
+      sendMail("resetpassword", obj);
+      return res.json({
+        message:"Rest password link sent"
+      })
     } else {
       return res.json({
         message: "Please Sign Up",
@@ -150,7 +160,7 @@ module.exports.resetPassword = async function resetPassword(req, res) {
     const user = await userModel.findOne({ resetToken: token });
     if (user) {
       //resetPasswordHelper will update user's password in database
-      user.resetPasswordHelper();
+      user.resetPasswordHelper(password,confirmPassword);
       await user.save();
       res.json({
         message: "User password changed successfully please login again",
