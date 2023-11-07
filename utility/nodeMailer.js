@@ -6,11 +6,12 @@ module.exports.sendMail = async function sendMail(str, data) {
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // true for 465, false for other ports
-    auth: {
-      user: "ryan14962@gmail.com",
-      pass: "ziiregnklidbvgqd",
+      auth: {
+        //Get your email and password from Google->Security->App Password
+      user: "abc@gmail.com",
+      pass: "xyz",
     },
-    debug: true,
+    //debug: true,
   });
 
   var Osubject, Ohtml;
@@ -34,7 +35,7 @@ module.exports.sendMail = async function sendMail(str, data) {
   try {
     // console.log("Email coming ", data.email);
     const info = await transporter.sendMail({
-      from: '"Taylor Swift Nation✨" <ryan14962@gmail.com>',
+      from: '"Taylor Swift Nation✨" <abc@gmail.com>',
       to: data.email, // Pass the recipient's email from the data object
       subject: Osubject,
       html: Ohtml,
